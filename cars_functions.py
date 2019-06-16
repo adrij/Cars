@@ -8,6 +8,9 @@ import seaborn as sns
 from bs4 import BeautifulSoup 
 import urllib.request 
 import ssl
+from time import time
+from sklearn.metrics import mean_squared_error
+from sklearn.metrics import r2_score
 
 #functions for dat scraping
 def find_links(soup, list_links):
@@ -556,3 +559,63 @@ def plot_stacked(df, x_axis, y1_axis,y1_label, y2_axis,y2_label, lim, title, leg
     ax.set_xticklabels(x_list, rotation=45, fontsize=7)
     ax.grid(False)
     ax2.grid(False)
+
+def test_classifier(X_train, y_train, X_test, y_test, classifier):
+    print("")
+    print("==================================================================================")
+    classifier_name = str(type(classifier).__name__)
+    print("Testing " + classifier_name)
+    now = time()
+    model = classifier.fit(X_train, y_train)
+    print("Learing time {0}s".format(time() - now))
+    now = time()
+    predictions = model.predict(X_test)
+    predictions_train = model.predict(X_train)
+    print("Predicting time {0}s".format(time() - now))
+    r2_test = r2_score(y_test, predictions)
+    mse_test = mean_squared_error(y_test, predictions)
+    r2_train = r2_score(y_train, predictions_train)
+    mse_train = mean_squared_error(y_train, predictions_train)
+
+    print("=================================== Results Training set======================================")
+    print("         bias")
+    print("MSE       " + str(mse_train))
+    print("R2        " + str(r2_train))
+    print("=================================== Results Testing set======================================")
+    print("         bias")
+    print("MSE       " + str(mse_test))
+    print("R2        " + str(r2_test))
+    
+    print("===================================================================================")
+
+    return model
+
+
+def plot_feature_importance(clf, n, X):
+    importances = clf.feature_importances_
+    indices = np.argsort(importances)[::-1]
+    print("Feature ranking:")
+    for f in range(n):
+        print("%d. feature: %s (%f)" % (f + 1, X.columns[indices[f]], importances[indices[f]]))
+
+    fig, ax= plt.subplots(figsize=(12,4))
+    plt.title("Feature importances")
+    plt.bar(range(n), importances[indices][:n], color="r",  align="center", alpha=0.4)
+    plt.xticks(range(n), X.columns[indices[:n]], rotation=90)
+    plt.xlim([-1, n])
+    plt.show()
+
+def get_top_vars(clf, n, X):
+    importances = rf.feature_importances_
+    indices = np.argsort(importances)[::-1][:n]
+    return indices
+
+def build_classifier(clf, X_train, y_train, X_test, y_test):
+    model = clf.fit(X_train, y_train)
+    predictions = model.predict(X_test)
+    predictions_train = model.predict(X_train)
+    r2_test = r2_score(y_test, predictions)
+    mse_test = mean_squared_error(y_test, predictions)
+    r2_train = r2_score(y_train, predictions_train)
+    mse_train = mean_squared_error(y_train, predictions_train)
+    return r2_test, mse_test, r2_train, mse_train
