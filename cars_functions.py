@@ -619,3 +619,22 @@ def build_classifier(clf, X_train, y_train, X_test, y_test):
     r2_train = r2_score(y_train, predictions_train)
     mse_train = mean_squared_error(y_train, predictions_train)
     return r2_test, mse_test, r2_train, mse_train
+
+def calc_price(scaler_model, model, cartype, Age_in_years, Performance_kW, Speedometer, WeightTotal,
+               Capacity, Flag_back_w, Luggagerack):
+    new_car=[]
+    #get the average proce of the cartype
+    cartype=cartype.upper()
+    df_avgprice=pd.read_csv('df_avgprice.csv', index_col=0).set_index('cartype')
+    avgprice=df_avgprice.loc[cartype,'Price_avg']
+    #get flag_mercedes
+    if 'MERCEDES' in cartype:
+        flag_mercedes=1
+    else:
+        flag_mercedes=0
+    #clculate the price
+    new_car.extend((Age_in_years, Performance_kW, Speedometer, avgprice, WeightTotal,
+               Capacity, Flag_back_w, Luggagerack, flag_mercedes))
+    new_car=np.array(new_car).reshape(1, -1)
+    new_car_std=scaler_model.transform(new_car)
+    return model.predict(new_car_std)

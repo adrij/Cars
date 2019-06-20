@@ -1,0 +1,110 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Fill in the features of the car</legend>
+                <div class="form-group">
+                    {{ form.cartype.label(class="form-control-label") }}
+                    {% if form.cartype.errors %}
+                        {{ form.cartype(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.cartype.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.cartype(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.age_in_years.label(class="form-control-label") }}
+
+                    {% if form.age_in_years.errors %}
+                        {{ form.age_in_years(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.age_in_years.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.age_in_years(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.performance_kw.label(class="form-control-label") }}
+                    {% if form.performance_kw.errors %}
+                        {{ form.performance_kw(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.performance_kw.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.performance_kw(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.speedometer.label(class="form-control-label") }}
+                    {% if form.speedometer.errors %}
+                        {{ form.speedometer(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.speedometer.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.speedometer(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.weightTotal.label(class="form-control-label") }}
+                    {% if form.weightTotal.errors %}
+                        {{ form.weightTotal(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.weightTotal.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.weightTotal(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.capacity.label(class="form-control-label") }}
+                    {% if form.capacity.errors %}
+                        {{ form.capacity(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.capacity.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.capacity(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                                <div class="form-group">
+                    {{ form.luggagerack.label(class="form-control-label") }}
+                    {% if form.luggagerack.errors %}
+                        {{ form.luggagerack(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.luggagerack.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.luggagerack(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.flag_back_w.label(class="form-control-label") }}
+                    {{ form.flag_back_w(class="form-control form-control-lg") }}  
+                </div> 
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
+{% endblock content %}
