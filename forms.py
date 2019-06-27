@@ -21,6 +21,6 @@ class CarsForm(FlaskForm):
     weightTotal = IntegerField('Weight total', validators=[DataRequired()])
     capacity = IntegerField('Capacity', validators=[DataRequired()])
     luggagerack = IntegerField('Luggagerack', validators=[DataRequired()])
-    flag_back_w = BooleanField('Back wheel prop')
+    flag_back_w = BooleanField('Back wheel drive')
     
     submit = SubmitField('Calculate')

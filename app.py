@@ -24,9 +24,9 @@ def cars():
         	request.form['performance_kw'], request.form['speedometer'], request.form['weightTotal'],
         	request.form['capacity'], flag_bw, request.form['luggagerack'])
         
-        flash('The average price of the car is {:.2f}'.format(price[0]), 'success')
+        flash('The average price of the car is {:.2f} EUR'.format(price[0]), 'success')
         #return redirect(url_for('cars'))
     return render_template('cars.html', title='Cars', form=form)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
