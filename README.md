@@ -47,13 +47,13 @@ All raw features were transformed into numerical values. The non-relevant inform
 2. Variable - Car classes 
   A new dataset was imported from a German webpage to define car classes. The dataset contained car classification categories based on producer and type. These new categories with their average prices can be seen in the following table:
 
-![Avgprice_carclass](/pictures/Averge price of car classes.png)
+![Avgprice_carclass](/pictures/Avg_price_classes.png)
 
 3. Variable - Producers
   There are in total 66 car producers in the dataset. I discarded producers with less than 100 cars for sale, since they wouldn't have much predictive value. The dummies for the remaining producers resulted in an additional 40 features.
 The average prices for the top producers can be seen in the following table:
 
-![Avgprice_producer](/pictures/Averge price of top producers.png)
+![Avgprice_producer](/pictures/avg_price_producers.png)
   
   The red columns show the distributions: the most common producers are OPEL, VOLKSWAGEN, FORD and BMW. The blue line corresponds to the     average price: the most expensive producers on average are BMW, AUDI and MERCEDES-BENZ. As seen before, there is an essential             difference between the price of car classes. It is also helpful to illustrate the stacked distribution of the cars based on the classes:
 
@@ -135,6 +135,9 @@ I also fitted an AdaBoost Regressor with the optimal decision tree. This regress
 ![Adaboost](/pictures/adaboost.png)
 
 If I used 9 variables in the AdaBoost regression, the performance of the fitted model decreased only by 0.1%. 
+The most important features with their importance is shown in the graph below:
+
+![Top features](/pictures/features.png)
 
 ## Use of the model
 
